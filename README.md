@@ -3,9 +3,6 @@ Sistem maklumat bagi laporan kerosakan peralatan ICT dan Aset
 
 > Untuk kegunaan local intranet
 
-## Blog
-https://nmfairus.blogspot.com
-
 ## Usual git command
 
 `git status`
