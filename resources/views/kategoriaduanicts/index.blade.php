@@ -1,0 +1,52 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="card">
+    <div class="card-header">Kategori Aduan ICT List</div>
+    <div class="card-body">
+        @can('create-aduanict')
+            <a href="{{ route('kategoriaduanicts.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Tambah Kategori Aduan</a>
+        @endcan
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">S#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($kategoriaduanicts as $kategoriaduanict)
+                <tr>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $kategoriaduanict->nama }}</td>
+                    <td>
+                        <form action="{{ route('kategoriaduanicts.destroy', $kategoriaduanict->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+
+                            @can('edit-aduanict')
+                                <a href="{{ route('kategoriaduanicts.edit', $kategoriaduanict->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                            @endcan
+
+                            @can('delete-aduanict')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this kategoriaduanict?');"><i class="bi bi-trash"></i> Delete</button>
+                            @endcan
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                    <td colspan="3">
+                        <span class="text-danger">
+                            <strong>Tiada Jenis Aset Dijumpai!</strong>
+                        </span>
+                    </td>
+                @endforelse
+            </tbody>
+        </table>
+
+        {{ $kategoriaduanicts->links() }}
+
+    </div>
+</div>
+@endsection
