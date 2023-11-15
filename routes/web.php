@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\AduanictController;
+use App\Http\Controllers\Upsm\AduanictController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JawatanController;
-use App\Http\Controllers\JenisAsetIctController;
-use App\Http\Controllers\KategoriAduanIctController;
+use App\Http\Controllers\Upsm\JenisAsetIctController;
+use App\Http\Controllers\Upsm\KategoriAduanIctController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\PublicaduanictController;
-use App\Http\Controllers\LokasiUtamaIctController;
+use App\Http\Controllers\Upsm\PublicaduanictController;
+use App\Http\Controllers\Upsm\LokasiUtamaIctController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 

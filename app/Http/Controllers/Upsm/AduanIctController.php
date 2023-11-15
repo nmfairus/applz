@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Upsm;
 
 use App\DataTables\AduanIctsDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\AduanIct;
 use App\Http\Requests\StoreAduanIctRequest;
 use App\Http\Requests\UpdateAduanIctRequest;
