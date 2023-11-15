@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicaduanictController;
 use App\Http\Controllers\LokasiUtamaIctController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Ekjp\KursusController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -25,6 +26,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/emohon', function () {
+    return view('welcome');
+});
+
+Route::get('/ekjp', function () {
+    return view('ekjp.home');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,6 +43,9 @@ Auth::routes(['register' => false]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/publicaduanict', [PublicaduanictController::class, 'create'])->name('publicaduanict');
 Route::post('/publicaduanict', [PublicaduanictController::class, 'store'])->name('publicaduanict.store');
+Route::get('/ekjp/senarai', [KursusController::class, 'senarai'])->name('ekjp.table');
+//Route::get('/ekjp/ajax-kursus', [KursusController::class, 'index']);
+Route::resource('/ekjp/ajax-kursus', KursusController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
