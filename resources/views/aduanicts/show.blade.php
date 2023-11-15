@@ -165,7 +165,7 @@
                     <div class="row">
                         <label for="description" class="col-md-4 col-form-label text-md-end text-start"><strong>Gambar:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                        <img src="{{ Storage::url($aduanict->gambar) }}" width="250" height="350" alt="" class="rounded img-thumbnail">
+                        <img src="{{ asset('storage/'.$aduanict->gambar) }}" width="250" height="350" alt="" class="rounded img-thumbnail">
                             
                         </div>
                     </div>

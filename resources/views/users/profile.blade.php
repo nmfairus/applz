@@ -80,9 +80,9 @@
                         <label for="description" class="col-md-4 col-form-label text-md-end text-start">Gambar:</label>
                         <div class="col-md-6" style="line-height: 35px;">
                         @if ($user->photo)
-                        <img src="{{ Storage::url($user->photo) }}" width="150" height="250" alt="" class="rounded img-thumbnail">
+                        <img src="{{ asset('storage/'.$user->photo) }}" width="150" height="250" alt="" class="rounded img-thumbnail">
                         @else
-                        <img src="{{ Storage::url('../user.png') }}" width="150" height="250" alt="" class="rounded img-thumbnail">
+                        <img src="{{ asset('storage/'.'../user.png') }}" width="150" height="250" alt="" class="rounded img-thumbnail">
                         @endif
                         </div>
                     </div>
