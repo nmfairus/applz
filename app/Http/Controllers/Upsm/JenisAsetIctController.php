@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Upsm;
 
+use App\Http\Controllers\Controller;
 use App\Models\JenisAsetIct;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

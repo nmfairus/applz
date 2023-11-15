@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Upsm;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePublicaduanictRequest;
 use App\Models\AduanIct;
 use App\Models\JenisAsetIct;

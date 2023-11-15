@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Upsm;
 
+use App\Http\Controllers\Controller;
 use App\Models\LokasiUtamaIct;
 use App\Http\Requests\StoreLokasiUtamaIctRequest;
 use App\Http\Requests\UpdateLokasiUtamaIctRequest;
