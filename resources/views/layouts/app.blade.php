@@ -96,7 +96,7 @@
                             </div>
                         @endif
                         @canany(['view-staf'])
-                        <h3 class="text-center mt-3 mb-3"><a class="btn btn-secondary" href="/home">Dashboard</a></h3>
+                        <h3 class="text-center mt-3 mb-3"><a class="btn btn-secondary" href="{{ route('home') }}">Dashboard</a></h3>
                         @endcanany
                         @yield('content')
                         
