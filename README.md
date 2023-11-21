@@ -50,5 +50,3 @@ Make sure that you have setup the environment properly. You will need minimum PH
 
 ## Composer command
 `composer require elibyy/tcpdf-laravel`
-
-test dulu
