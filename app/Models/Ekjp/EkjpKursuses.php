@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class EkjpKursuses extends Model
 {
     //use HasFactory;
+
+
 }

@@ -3,7 +3,11 @@
 @section('title', 'Senarai Kursus - eKJP')
 
 @section('style')
-
+<style>
+    .table-hover tr {
+    cursor: pointer;
+}
+    </style>
 @endsection
 
 @section('content')
@@ -16,11 +20,23 @@
             <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="/ekjp/senarai">Senarai Kursus</a>
         </nav>
     </div>
+
 </header>
 
 <main class="px-3">
     <img src="{{ asset('logo.png') }}" class="img-rounded" alt="Cinque Terre" width="152" height="118">
     <h1>Kursus Jangka Pendek yang Ditawarkan ADTEC Kulim</h1>
+    <!-- Way 1: Display All Error Messages -->
+    @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul class="text-start">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 </main>
 <hr>
 <table id="example" class="text-start table-hover table table-striped" style="width:100%">
@@ -64,18 +80,25 @@
 <!-- Modal -->
 <div class="modal fade" data-bs-theme="dark" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 id="exampleModalLabel">Modal title</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div id="kandungan-kursus" class="modal-body">
-                ...
+            <div class="modal-body">
+                <pre class="text-start" id="kandungan-kursus"></pre>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer d-flex justify-content-center">
+                <form method="POST" action="" id="formMohon">
+                    @csrf
+                    <div class="input-group mb-3 pull-left">
+                        <span class="input-group-text" id="addon-wrapping">No. Kad Pengenalan</span>
+                        <input type="text" name="noic" class="form-control" placeholder="Dalam format xxxxxxxxxxxx" aria-label="NoIC">
+                        <button type="submit" class="btn btn-primary">Mohon</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -86,39 +109,23 @@
 @section('script')
 <script>
 let table = new DataTable('#example');
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+});
 
-table.on('click', 'tbody tr', function() {
-    let data = table.row(this).data();
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    e.preventDefault();
-    var formData = {
-        id: text(data[1]),
-    };
-    var type = "POST";
-    var ajaxurl = 'todo';
-    $.ajax({
-        type: type,
-        url: ajaxurl,
-        data: formData,
-        dataType: 'json',
-        success: function(data) {
-            $("#exampleModalLabel").text(data[1]);
-            $("#kandungan-kursus").text(data[1]);
-            const myModal = new bootstrap.Modal('#myModal', {
-                keyboard: true
-            });
-            myModal.show();
-            //alert('You clicked on ' + data[0] + "'s row");
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-
+table.on('click', 'tbody tr', function(e) {
+    let senarai = table.row(this).data();
+    $.get('/ekjp/kursus/' + senarai[0], function(result) {
+        $('#formMohon').attr('action', 'mohon/' + result.id);
+        $("#exampleModalLabel").text(result.kursus);
+        $("#kandungan-kursus").html(result.kandungan);
+        const myModal = new bootstrap.Modal('#myModal', {
+            keyboard: true
+        });
+        myModal.show();
+    })
 });
 </script>
 @endsection
