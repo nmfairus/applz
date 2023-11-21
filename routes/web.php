@@ -75,9 +75,8 @@ Route::resources([
     'aduanicts' => AduanictController::class,
     'jenisaseticts' => JenisAsetIctController::class,
     'kategoriaduanicts' => KategoriAduanIctController::class,
-    'aduanicts' => AduanictController::class,
-    'jawatans' => JawatanController::class,
-    'lokasiutamaicts' => LokasiUtamaIctController::class
+    'lokasiutamaicts' => LokasiUtamaIctController::class,
+                 
     'aduanuppas' => AduanUppaController::class,
     'jenisasetuppas' => JenisAsetUppaController::class,
     'kategoriaduanuppas' => KategoriAduanUppaController::class,
