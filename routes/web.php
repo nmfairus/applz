@@ -18,6 +18,7 @@ use App\Http\Controllers\Upsm\PublicaduanictController;
 use App\Http\Controllers\Upsm\LokasiUtamaIctController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ekjp\KursusController;
+use App\Http\Controllers\Ekjp\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -76,9 +77,10 @@ Route::resources([
     'jenisaseticts' => JenisAsetIctController::class,
     'kategoriaduanicts' => KategoriAduanIctController::class,
     'lokasiutamaicts' => LokasiUtamaIctController::class,
-                 
+
     'aduanuppas' => AduanUppaController::class,
     'jenisasetuppas' => JenisAsetUppaController::class,
     'kategoriaduanuppas' => KategoriAduanUppaController::class,
     'lokasiutamauppas' => LokasiUtamaUppaController::class,
+    'ekjp/admin' => AdminController::class,
 ]);
