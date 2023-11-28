@@ -26,7 +26,7 @@ class AdminController extends Controller
                     ->get();
 
          // load the view and pass the sharks
-         return View('ekjp.admin.index')->with('sharks', $kursus);
+         return View('ekjp.admin.index')->with('viewData', $kursus);
     }
 
     /**
@@ -83,8 +83,8 @@ class AdminController extends Controller
         $viewData['kursus'] = EkjpKursuses::find($id);
         $viewData['pemohon']  = EkjpRecords::leftJoin('ekjp_kursuses', 'ekjp_kursuses.id', '=', 'ekjp_records.kursus_id')
                         ->leftJoin('ekjp_users', 'ekjp_records.user_noic', '=', 'ekjp_users.noic')
-                        ->select('ekjp_users.*')
-                        ->where('ekjp_records.id',$id)
+                        ->select('ekjp_users.*', 'ekjp_records.id AS id', 'ekjp_records.kursus_id AS rekod_id')
+                        ->where('ekjp_kursuses.id',$id)
                         ->get();
 
         // load the view and pass the sharks
@@ -106,14 +106,62 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'kursus' => 'required|string',
+            'bidang' => 'required|string',
+            'tempoh' => 'required|string',
+            'tarikh' => 'required|string',
+            'yuran' => 'required|string',
+            'kandungan' => 'required|string',
+            'catatan' => '',
+        ], [
+            'kursus.required' => 'ruang nama mesti diisi',
+            'bidang.required' => 'ruang bidang mesti diisi',
+            'tempoh.required' => 'ruang tempoh mesti diisi',
+            'tarikh.required' => 'ruang tarikh mesti diisi',
+            'yuran.required' => 'ruang yuran mesti diisi',
+            'kandungan.required' => 'ruang kandungan mesti diisi',
+        ]);
+        $kursus = EkjpKursuses::find($id);
+
+        $kursus->kursus = $validatedData['kursus'];
+        $kursus->bidang = $validatedData['bidang'];
+        $kursus->tempoh = $validatedData['tempoh'];
+        $kursus->tarikh = $validatedData['tarikh'];
+        $kursus->yuran = $validatedData['yuran'];
+        $kursus->kandungan = $validatedData['kandungan'];
+        $kursus->catatan = $validatedData['catatan'];
+
+        $kursus->save();
+
+        return redirect('ekjp/admin')->with('message', 'Kursus baru berjaya dipinda!');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         //
+        $arahan = $request->input('arahan');
+
+
+        if($arahan=='kursus')
+        {
+            $kursus = EkjpKursuses::find($id);
+
+            $res=EkjpRecords::where('kursus_id',$kursus['id'])->delete();
+
+            $kursus->delete();
+            return redirect()->route('admin.index')->with('message', 'kursus bejaya dibuang!!!');
+
+        } else if($arahan=='rekod'){
+            $page_id = $request->input('kursus');
+            $rekod = EkjpRecords::find($id);
+            $rekod->delete();
+            return redirect()->route('admin.show', $page_id )->with('message', 'Rekod bejaya dibuang!!!');
+        }
+
     }
 }

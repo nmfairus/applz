@@ -21,8 +21,8 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/') }}" class="nav-link" aria-current="page">Utama</a></li>
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/create') }}" class="nav-link active">Tambah Kursus</a></li>
+                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link" aria-current="page">Utama</a></li>
+                <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link active">Tambah Kursus</a></li>
             </ul>
         </header>
     </div>
@@ -42,8 +42,9 @@
 
         <main class="form-signin w-100 m-auto">
 
-            <form class="gelap text-start text-white" method="post" action="{{url('ekjp/admin')}}">
+            <form class="gelap text-start text-white" method="POST" action="{{ route('admin.store')}}">
                 @csrf
+                @method('POST')
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Nama Kursus</span>
@@ -65,7 +66,7 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">Tarikh</span>
-                    <textarea name="tarikh" class="form-control" aria-label="With textarea" rows="6" cols="50"
+                    <textarea name="tarikh" class="form-control" aria-label="With textarea" rows="4" cols="50"
                         placeholder="tarikh kursus">{{ old('tarikh') }}</textarea>
                 </div>
 
@@ -86,7 +87,9 @@
                     <textarea name="catatan" class="form-control" aria-label="With textarea">{{ old('catatan') }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="submit">Hantar</button>
+                </div>
 
             <form>
 

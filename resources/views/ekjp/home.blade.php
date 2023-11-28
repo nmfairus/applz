@@ -31,6 +31,6 @@
     <p class="lead">
         <a href="/ekjp/senarai" class="btn btn-lg btn-light fw-bold border-white bg-white">Senarai Kursus</a>
     </p>
-    {{ session('mohonData.user') }}
+
 </main>
 @endsection

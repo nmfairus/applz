@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="{{url('ekjp/admin')}}"
+            <a href="{{ route('admin.index') }}"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
@@ -24,14 +24,24 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/') }}" class="nav-link" aria-current="page">Utama</a></li>
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/create') }}" class="nav-link" aria-current="page">Tambah Kursus</a></li>
+                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link" aria-current="page">Utama</a>
+                </li>
+                <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link" aria-current="page">Tambah
+                        Kursus</a></li>
+                <li class="nav-item"><a href="{{ route('admin.edit', $viewData['kursus']['id']) }}" class="nav-link">Pinda
+                        Kursus</a>
+                </li>
                 <li class="nav-item"><a href="#" class="nav-link active">Permohonan Kursus</a></li>
             </ul>
         </header>
     </div>
 
     <div class="container px-4 py-5">
+        <!-- will be used to show any messages -->
+        @if (Session::has('message'))
+        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+        @endif
+
         <h2 class="pb-2 border-bottom">{{ $viewData["kursus"]["kursus"] }}</h2>
 
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
@@ -82,11 +92,6 @@
     </div>
 
     <div class="container">
-        <!-- will be used to show any messages -->
-        @if (Session::has('message'))
-        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
-        @endif
-
         <table id="example" class="text-start table-hover table table-striped" style="width:100%">
             <thead>
                 <tr>
@@ -105,10 +110,13 @@
                     <td>{{ $senarai["email"] }}</td>
                     <td>{{ $senarai["telefon"] }}</td>
                     <td>
-
-                        <!-- delete the shark (uses the destroy method DESTROY /sharks/{id} -->
-                        <!-- we will add this later since its a little more complicated than the other two buttons -->
-                        DELETE
+                        <form action="{{ route('admin.destroy', $senarai['id']) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="arahan" value="rekod">
+                            <input type="hidden" name="kursus" value="{{ $viewData['kursus']['id'] }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
 
                     </td>
                 </tr>

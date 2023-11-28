@@ -24,8 +24,8 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/') }}" class="nav-link active" aria-current="page">Utama</a></li>
-                <li class="nav-item"><a href="{{ URL::to('ekjp/admin/create') }}" class="nav-link">Tambah Kursus</a></li>
+                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link active" aria-current="page">Utama</a></li>
+                <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link">Tambah Kursus</a></li>
             </ul>
         </header>
     </div>
@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($sharks as $key => $value)
+                @foreach($viewData as $key => $value)
                 <tr>
                     <td>{{ $value->kursus }}</td>
                     <td>{{ $value->bidang }}</td>
@@ -57,14 +57,20 @@
 
                         <!-- delete the shark (uses the destroy method DESTROY /sharks/{id} -->
                         <!-- we will add this later since its a little more complicated than the other two buttons -->
+                        <form action="{{ route('admin.destroy', $value->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="arahan" value="kursus">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
 
                         <!-- show the shark (uses the show method found at GET /sharks/{id} -->
-                        <a class="btn btn-small btn-success" href="{{ URL::to('ekjp/admin/' . $value->id) }}">Lihat
+                        <a class="btn btn-sm btn-success" href="{{ route('admin.show', $value->id) }}">Lihat
                             Permohonan</a>
 
                         <!-- edit this shark (uses the edit method found at GET /sharks/{id}/edit -->
-                        <a class="btn btn-small btn-info"
-                            href="{{ URL::to('ekjp/admin/' . $value->id . '/edit') }}">Pinda Maklumat Kursus</a>
+                        <a class="btn btn-sm btn-info"
+                            href="{{ route('admin.edit', $value->id) }}">Pinda Maklumat Kursus</a>
 
                     </td>
                 </tr>

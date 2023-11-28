@@ -6,6 +6,8 @@ use App\Models\Ekjp\EkjpRecords;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Mail\NotifyMail;
+use Illuminate\Support\Facades\Mail;
 
 class KursusController extends Controller
 {
@@ -91,10 +93,15 @@ class KursusController extends Controller
 
         );
 
+
         $viewData = [];
+        $viewData['kursus']  = EkjpKursuses::find($validatedData['kursus_id']);
         $viewData['user'] = $user;
         $viewData['record'] = $record;
-        $viewData['message'] = "Permohonan telah direkodkan dan akan diproses.";
+        $viewData['message'] = "Permohonan telah direkodkan dan akan diproses. Maklumat permohonan juga telah dihantar melalui email.";
+
+        // The email sending is done using the to method on the Mail facade
+        Mail::to($validatedData['email'])->send(new NotifyMail($viewData));
 
         return redirect('ekjp/')->with("mohonData", $viewData);
     }

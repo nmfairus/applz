@@ -13,5 +13,5 @@ class EkjpUsers extends Model
         'nama',
         'email',
         'telefon',
-];
+    ];
 }
