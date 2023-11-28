@@ -28,6 +28,15 @@
                 <li class="nav-item"><a href="{{ route('admin.edit', $viewData['id']) }}" class="nav-link active">Pinda
                         Kursus</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        <button type="button" class="btn btn-warning">Logout</button>
+                    </form>
+                </li>
             </ul>
         </header>
     </div>

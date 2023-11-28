@@ -23,6 +23,15 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link" aria-current="page">Utama</a></li>
                 <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link active">Tambah Kursus</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        <button type="button" class="btn btn-warning">Logout</button>
+                    </form>
+                </li>
             </ul>
         </header>
     </div>

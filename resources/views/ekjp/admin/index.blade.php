@@ -24,8 +24,18 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link active" aria-current="page">Utama</a></li>
+                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link active"
+                        aria-current="page">Utama</a></li>
                 <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link">Tambah Kursus</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        <button type="button" class="btn btn-warning">Logout</button>
+                    </form>
+                </li>
             </ul>
         </header>
     </div>
@@ -69,8 +79,8 @@
                             Permohonan</a>
 
                         <!-- edit this shark (uses the edit method found at GET /sharks/{id}/edit -->
-                        <a class="btn btn-sm btn-info"
-                            href="{{ route('admin.edit', $value->id) }}">Pinda Maklumat Kursus</a>
+                        <a class="btn btn-sm btn-info" href="{{ route('admin.edit', $value->id) }}">Pinda Maklumat
+                            Kursus</a>
 
                     </td>
                 </tr>

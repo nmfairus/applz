@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth');
+       $this->middleware('permission:sistem-ekjp', ['only' => ['index', 'destroy', 'create','store', 'show', 'update', 'edit']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -134,7 +140,7 @@ class AdminController extends Controller
 
         $kursus->save();
 
-        return redirect('ekjp/admin')->with('message', 'Kursus baru berjaya dipinda!');
+        return redirect('ekjp/admin')->with('message', 'Kursus berjaya dipinda!');
 
     }
 

@@ -38,7 +38,7 @@ Route::get('/emohon', function () {
 
 Route::get('/ekjp', function () {
     return view('ekjp.home');
-});
+})->name('ekjp');
 
 Route::get('/', function () {
     return view('welcome');
