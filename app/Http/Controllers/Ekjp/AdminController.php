@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Ekjp\EkjpKursuses;
 use App\Models\Ekjp\EkjpRecords;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+use App\Exports\KursusExport;
+use App\Imports\KursusImport;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -49,6 +55,9 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $arahan = $request->input('jenis');
+
+        if($arahan=='form'){
         $validatedData = $request->validate([
             'kursus' => 'required|string',
             'bidang' => 'required|string',
@@ -75,6 +84,13 @@ class AdminController extends Controller
             'kandungan' => $validatedData['kandungan'],
             'catatan' => $validatedData['catatan'],
         ]);
+        } else if($arahan=='upload'){
+            $request->validate([
+                'file' => 'required|mimes:xlsx,xlx,xls|max:2048'
+                ]);
+            Excel::import(new KursusImport,$request->file('file'));
+        }
+        //return redirect('ekjp/admin')->with('message', $url);
         return redirect('ekjp/admin')->with('message', 'Kursus baru berjaya ditambah!');
 
 
@@ -85,6 +101,10 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
+        if($id=='xlsx'){
+            return Excel::download(new KursusExport, 'kursus.'.$id);
+        }
+        else{
         $viewData = [];
         $viewData['kursus'] = EkjpKursuses::find($id);
         $viewData['pemohon']  = EkjpRecords::leftJoin('ekjp_kursuses', 'ekjp_kursuses.id', '=', 'ekjp_records.kursus_id')
@@ -95,6 +115,7 @@ class AdminController extends Controller
 
         // load the view and pass the sharks
         return View('ekjp.admin.show')->with('viewData', $viewData);
+        }
     }
 
     /**

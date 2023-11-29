@@ -28,9 +28,10 @@ class NotifyMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $maklumat = $this->viewData;
         return new Envelope(
-            from: new Address('ekjp.adteckulim@gmail.com', 'ekjp admin'),
-            subject: 'Permohonan eKJP ADTEC Kulim',
+            from: new Address('ekjp.adteckulim@gmail.com', 'EKJP ADTEC KULIM'),
+            subject: 'Permohonan eKJP ADTEC Kulim bagi kursus ' . $maklumat['kursus']['kursus'] . ' oleh ' . $maklumat['user']['nama'] ,
         );
     }
 

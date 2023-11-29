@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div class="container">
+    <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="{{url('ekjp/admin')}}"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -21,8 +21,10 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link" aria-current="page">Utama</a></li>
-                <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link active">Tambah Kursus</a></li>
+                <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link" aria-current="page">Utama</a>
+                </li>
+                <li class="nav-item"><a href="{{ route('admin.create') }}" class="nav-link active">Tambah Kursus</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -54,23 +56,24 @@
             <form class="gelap text-start text-white" method="POST" action="{{ route('admin.store')}}">
                 @csrf
                 @method('POST')
+                <input type="hidden" name="jenis" value="form">
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Nama Kursus</span>
-                    <input value="{{ old('kursus') }}" name="kursus" type="text" class="form-control" placeholder="nama kursus" aria-label="Username"
-                        aria-describedby="basic-addon1">
+                    <input value="{{ old('kursus') }}" name="kursus" type="text" class="form-control"
+                        placeholder="nama kursus" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Bidang Kursus</span>
-                    <input value="{{ old('bidang') }}" name="bidang" type="text" class="form-control" placeholder="bidang kursus"
-                        aria-label="Username" aria-describedby="basic-addon1">
+                    <input value="{{ old('bidang') }}" name="bidang" type="text" class="form-control"
+                        placeholder="bidang kursus" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Tempoh Kursus (Hari)</span>
-                    <input value="{{ old('tempoh') }}" name="tempoh" type="text" class="form-control" placeholder="tempoh kursus"
-                        aria-label="Username" aria-describedby="basic-addon1">
+                    <input value="{{ old('tempoh') }}" name="tempoh" type="text" class="form-control"
+                        placeholder="tempoh kursus" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">
@@ -81,8 +84,8 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Yuran Kursus (RM)</span>
-                    <input value="{{ old('yuran') }}" name="yuran" type="text" class="form-control" placeholder="yuran kursus"
-                        aria-label="Username" aria-describedby="basic-addon1">
+                    <input value="{{ old('yuran') }}" name="yuran" type="text" class="form-control"
+                        placeholder="yuran kursus" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">
@@ -93,14 +96,40 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">Catatan</span>
-                    <textarea name="catatan" class="form-control" aria-label="With textarea">{{ old('catatan') }}</textarea>
+                    <textarea name="catatan" class="form-control"
+                        aria-label="With textarea">{{ old('catatan') }}</textarea>
                 </div>
 
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button class="btn btn-primary" type="submit">Hantar</button>
                 </div>
 
-            <form>
+            </form>
+
+            <hr>
+            <br>
+            <br>
+            <h2 class="text-center" >Upload File dari Excel. File excel mestilah mengikut format yang betul.</h2>
+            <p class="text-center" >Jika <b>id</b> wujud maklumat akan diganti baru.</p>
+
+            <form class="gelap text-start text-white" method="POST" action="{{ route('admin.store')}}"
+                enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <input type="hidden" name="jenis" value="upload">
+                <div class="input-group mb-3">
+                    <input type="file" name="file" class="form-control" id="inputGroupFile02">
+                    <label class="input-group-text" for="inputGroupFile02">Pilih Fail</label>
+                </div>
+                <p><a href="{{ route('admin.show', 'xlsx') }}">Muat Turun Fail Excel</a></p>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-success" type="submit">Muat Nail Fail Excel</button>
+                </div>
+
+            </form>
+            <br>
+
 
         </main>
 

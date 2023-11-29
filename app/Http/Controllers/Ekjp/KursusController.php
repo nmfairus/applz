@@ -101,7 +101,9 @@ class KursusController extends Controller
         $viewData['message'] = "Permohonan telah direkodkan dan akan diproses. Maklumat permohonan juga telah dihantar melalui email.";
 
         // The email sending is done using the to method on the Mail facade
-        Mail::to($validatedData['email'])->send(new NotifyMail($viewData));
+        Mail::to($validatedData['email'])
+        ->cc('faiz.lop@gmail.com')
+        ->send(new NotifyMail($viewData));
 
         return redirect('ekjp/')->with("mohonData", $viewData);
     }
