@@ -102,7 +102,7 @@ class KursusController extends Controller
 
         // The email sending is done using the to method on the Mail facade
         Mail::to($validatedData['email'])
-        ->cc('faiz.lop@gmail.com')
+        ->cc('hanifah@jtm.gov.my')
         ->send(new NotifyMail($viewData));
 
         return redirect('ekjp/')->with("mohonData", $viewData);
