@@ -11,8 +11,8 @@
     <div>
         <h3 class="float-md-start mb-0">eKJP ADTEC Kulim</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/ekjp">Home</a>
-            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/ekjp/senarai">Senarai Kursus</a>
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="{{route('ekjp')}}">Home</a>
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="{{route('ekjp.senarai')}}">Senarai Kursus</a>
         </nav>
     </div>
 
@@ -80,7 +80,7 @@
 
 <hr>
 <h3>Maklumat Peribadi</h3>
-<form class="gelap text-start text-white" method="post" action="{{url('ekjp/mohonform')}}">
+<form class="gelap text-start text-white" method="post" action="{{route('ekjp.mohonform')}}">
     @csrf
     <div class="row g-5">
         <div class="col-8">

@@ -50,11 +50,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/publicaduanict', [PublicaduanictController::class, 'create'])->name('publicaduanict');
 Route::post('/publicaduanict', [PublicaduanictController::class, 'store'])->name('publicaduanict.store');
 //ekjp section
-Route::get('/ekjp/senarai', [KursusController::class, 'senarai']);
-Route::get('/ekjp/kursus/{id}', [KursusController::class, 'kursus']);
-Route::get('/ekjp/mohon/{id}', [KursusController::class, 'mohon']);
-Route::post('/ekjp/mohon/{id}', [KursusController::class, 'mohon']);
-Route::post('/ekjp/mohonform', [KursusController::class, 'mohonForm']);
+Route::get('/ekjp/senarai', [KursusController::class, 'senarai'])->name('ekjp.senarai');
+Route::get('/ekjp/kursus/{id}', [KursusController::class, 'kursus'])->name('ekjp.kursus');
+Route::get('/ekjp/mohon/{id}', [KursusController::class, 'mohon'])->name('ekjp.mohon');
+Route::post('/ekjp/mohon/{id}', [KursusController::class, 'mohon'])->name('ekjp.mohonpost');
+Route::post('/ekjp/mohonform', [KursusController::class, 'mohonForm'])->name('ekjp.mohonform');
 Route::get('/publicaduanuppa', [PublicAduanUppaController::class, 'create'])->name('publicaduanuppa');
 Route::post('/publicaduanuppa', [PublicAduanUppaController::class, 'store'])->name('publicaduanuppa.store');
 

@@ -35,7 +35,7 @@ class KursusImport implements ToModel, WithHeadingRow
                 'bidang' => $row['bidang'],
                 'tempoh' => $row['tempoh'],
                 'yuran' => $row['yuran'],
-                'tarikh' => $row['bidang'],
+                'tarikh' => $row['tarikh'],
                 'kandungan' => $row['kandungan'],
                 'catatan' => $row['catatan'],
                 ]
