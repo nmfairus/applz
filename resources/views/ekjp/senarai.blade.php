@@ -16,8 +16,8 @@
     <div>
         <h3 class="float-md-start mb-0">eKJP ADTEC Kulim</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="{{route('ekjp')}}">Home</a>
-            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{{route('ekjp.senarai')}}">Senarai Kursus</a>
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/ekjp">Home</a>
+            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="/ekjp/senarai">Senarai Kursus</a>
         </nav>
     </div>
 
@@ -117,7 +117,7 @@ $.ajaxSetup({
 
 table.on('click', 'tbody tr', function(e) {
     let senarai = table.row(this).data();
-    $.get('/apps/ekjp/kursus/' + senarai[0], function(result) {
+    $.get('/ekjp/kursus/' + senarai[0], function(result) {
         $('#formMohon').attr('action', 'mohon/' + result.id);
         $("#exampleModalLabel").text(result.kursus);
         $("#kandungan-kursus").html(result.kandungan);
