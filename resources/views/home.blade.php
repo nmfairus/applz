@@ -17,12 +17,6 @@
                     {{ __('Selamat Datang') }} <span class="fw-bold">{{ Auth::user()->name }}</span>
 
                     <p>Halaman utama sistem E-Aduan.</p>
-
-                    @canany(['sistem-ekjp'])
-                        <a class="btn btn-primary" href="{{ route('admin.index') }}">
-                            <i class="bi bi-person-fill-gear"></i> Sistem eKJP</a>
-                    @endcanany
-
                     @canany(['create-role', 'edit-role', 'delete-role'])
                         <a class="btn btn-primary" href="{{ route('roles.index') }}">
                             <i class="bi bi-person-fill-gear"></i> Manage Roles</a>
@@ -44,7 +38,7 @@
                             <i class="bi bi-bag"></i> Manage Aduan UPPA</a>
                     @endcanany
                     <p>&nbsp;</p>
-
+                    
                     @canany(['create-aduanict', 'edit-aduanict', 'delete-aduanict'])
                     <hr>
                     <p>Tambah Jadual (ICT)</p>
