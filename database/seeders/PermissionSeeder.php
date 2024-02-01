@@ -29,10 +29,9 @@ class PermissionSeeder extends Seeder
             'delete-aduanict',
             'create-aduanuppa',
             'edit-aduanuppa',
-            'delete-aduanuppa',
-            'sistem-ekjp'
+            'delete-aduanuppa'
          ];
-
+ 
           // Looping and Inserting Array's Permissions into Permission Table
          foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

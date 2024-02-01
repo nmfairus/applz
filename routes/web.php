@@ -17,8 +17,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Upsm\PublicaduanictController;
 use App\Http\Controllers\Upsm\LokasiUtamaIctController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Ekjp\KursusController;
-use App\Http\Controllers\Ekjp\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -32,14 +30,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/emohon', function () {
-    return view('welcome');
-});
-
-Route::get('/ekjp', function () {
-    return view('ekjp.home');
-})->name('ekjp');
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,12 +39,7 @@ Auth::routes(['register' => false]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/publicaduanict', [PublicaduanictController::class, 'create'])->name('publicaduanict');
 Route::post('/publicaduanict', [PublicaduanictController::class, 'store'])->name('publicaduanict.store');
-//ekjp section
-Route::get('/ekjp/senarai', [KursusController::class, 'senarai']);
-Route::get('/ekjp/kursus/{id}', [KursusController::class, 'kursus']);
-Route::get('/ekjp/mohon/{id}', [KursusController::class, 'mohon']);
-Route::post('/ekjp/mohon/{id}', [KursusController::class, 'mohon']);
-Route::post('/ekjp/mohonform', [KursusController::class, 'mohonForm']);
+
 Route::get('/publicaduanuppa', [PublicAduanUppaController::class, 'create'])->name('publicaduanuppa');
 Route::post('/publicaduanuppa', [PublicAduanUppaController::class, 'store'])->name('publicaduanuppa.store');
 
@@ -82,5 +67,4 @@ Route::resources([
     'jenisasetuppas' => JenisAsetUppaController::class,
     'kategoriaduanuppas' => KategoriAduanUppaController::class,
     'lokasiutamauppas' => LokasiUtamaUppaController::class,
-    'ekjp/admin' => AdminController::class,
 ]);
