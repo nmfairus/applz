@@ -1,5 +1,5 @@
 # Sistem E-Aduan
-Sistem maklumat bagi laporan kerosakan peralatan ICT dan Aset 
+Sistem maklumat bagi pelaporan kerosakan peralatan ICT dan Aset 
 
 > Untuk kegunaan local intranet
 
