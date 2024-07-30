@@ -161,7 +161,7 @@
                     <div class="mb-3 row">
                         <label for="tarikh_laporan" class="col-md-4 col-form-label text-md-end text-start">Tarikh Laporan</label>
                         <div class="col-md-6">
-                          <input type="date" class="form-control @error('tarikh_laporan') is-invalid @enderror" id="tarikh_laporan" name="tarikh_laporan" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                          <input type="date" class="form-control @error('tarikh_laporan') is-invalid @enderror" id="tarikh_laporan" name="tarikh_laporan" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" disabled>
                             @if ($errors->has('tarikh_laporan'))
                                 <span class="text-danger">{{ $errors->first('tarikh_laporan') }}</span>
                             @endif
